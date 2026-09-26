@@ -47,6 +47,10 @@ export interface RetrainResponse {
   train_size?: number;
   test_size?: number;
   message: string;
+  metrics?: {
+    context_window?: number;
+    latency?: number;
+  };
 }
 
 export interface CustomerDeepDiveResponse {
@@ -72,4 +76,8 @@ export interface SegmentationResponse {
 export interface ActionResponse {
   status: string;
   message: string;
+  metrics?: {
+    context_window?: number;
+    latency?: number;
+  };
 }
