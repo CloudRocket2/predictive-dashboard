@@ -26,7 +26,7 @@ export default function Sidebar({ activePage, onNavigate }: SidebarProps) {
              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
            </svg>
         </div>
-        <span className="text-xl font-semibold text-slate-800 dark:text-slate-100 tracking-tight">Predictive</span>
+        <span className="text-xl font-semibold text-slate-800 dark:text-slate-100 tracking-tight">Foresight</span>
       </div>
 
       {/* Navigation */}

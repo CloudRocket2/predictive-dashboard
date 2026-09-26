@@ -9,7 +9,7 @@ const font = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "ChurnGuard — Predictive Churn Dashboard",
+  title: "Foresight — AI Churn Prediction",
   description: "Enterprise-grade churn prediction with XGBoost, SHAP explainability, and drift monitoring.",
 };
 
