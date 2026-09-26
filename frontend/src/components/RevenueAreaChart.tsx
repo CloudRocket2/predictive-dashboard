@@ -35,7 +35,7 @@ export default function RevenueAreaChart({ baselineRevenue, retainedRevenue, tar
   let currentVal = targetMRR;
   const historicalData = [];
   for (let i = numPoints - 1; i >= 0; i--) {
-    const added = Math.max(1000, Math.random() * 8000); // Add 1k-8k per day/week/month
+    const added = Math.max(1000 * baseMultiplier, Math.random() * (8000 * baseMultiplier)); 
     historicalData.unshift({ val: currentVal, added: added });
     currentVal -= added;
   }
