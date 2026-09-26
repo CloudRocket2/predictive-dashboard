@@ -15,7 +15,7 @@ export default function MetricCards({ totalRevenue, mrr, revenueAtRisk, totalCus
   const [timeRange, setTimeRange] = useState<'Days' | 'Week' | 'Month'>('Month');
 
   // Multipliers to mock data changing based on time range
-  const multiplier = timeRange === 'Days' ? 0.03 : timeRange === 'Week' ? 0.25 : 1;
+  const multiplier = timeRange === 'Days' ? 0.033 : timeRange === 'Week' ? 0.25 : 1;
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -35,13 +35,13 @@ export default function MetricCards({ totalRevenue, mrr, revenueAtRisk, totalCus
   const metrics = [
     {
       title: 'Total Revenue',
-      value: formatK(totalRevenue), // Historical total LTV
+      value: formatK(totalRevenue * multiplier), // Scales 16.1M down for demo purposes
       trend: timeRange === 'Month' ? 4.8 : timeRange === 'Week' ? 1.2 : 0.1,
       icon: DollarSign,
     },
     {
       title: 'Monthly Recurring Revenue',
-      value: formatK(mrr), 
+      value: formatK(mrr * multiplier), // Scales MRR down for demo purposes
       trend: timeRange === 'Month' ? 21.8 : timeRange === 'Week' ? 12.4 : 5.6,
       icon: TrendingUp,
     },
@@ -53,8 +53,8 @@ export default function MetricCards({ totalRevenue, mrr, revenueAtRisk, totalCus
     },
     {
       title: 'Churn Rate',
-      value: `${(avgChurnRisk * 100).toFixed(1)}%`,
-      trend: -12.8,
+      value: `${(avgChurnRisk * 100 * multiplier).toFixed(1)}%`,
+      trend: timeRange === 'Month' ? -12.8 : timeRange === 'Week' ? -3.2 : -0.4,
       icon: Activity,
     },
   ];
