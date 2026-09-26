@@ -27,6 +27,14 @@ export interface DashboardSummary {
     psi_score: number;
     status: string;
   };
+  risk_distribution: {
+    lowRisk: number;
+    mediumRisk: number;
+    highRisk: number;
+    lowRevenue: number;
+    mediumRevenue: number;
+    highRevenue: number;
+  };
 }
 
 export interface SimulationResponse {

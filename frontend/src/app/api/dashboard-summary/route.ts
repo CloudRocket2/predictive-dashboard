@@ -15,6 +15,18 @@ export async function GET() {
     const { rows: riskRows } = await pool.query('SELECT AVG(churn_probability) as avg_risk FROM predictions');
     const avgRisk = parseFloat(riskRows[0].avg_risk || 0);
 
+    const { rows: distRows } = await pool.query(`
+      SELECT 
+        SUM(CASE WHEN churn_probability <= 0.5 THEN 1 ELSE 0 END) as low_risk_count,
+        SUM(CASE WHEN churn_probability > 0.5 AND churn_probability <= 0.75 THEN 1 ELSE 0 END) as medium_risk_count,
+        SUM(CASE WHEN churn_probability > 0.75 THEN 1 ELSE 0 END) as high_risk_count,
+        SUM(CASE WHEN churn_probability <= 0.5 THEN monthly_charges ELSE 0 END) as low_risk_rev,
+        SUM(CASE WHEN churn_probability > 0.5 AND churn_probability <= 0.75 THEN monthly_charges ELSE 0 END) as medium_risk_rev,
+        SUM(CASE WHEN churn_probability > 0.75 THEN monthly_charges ELSE 0 END) as high_risk_rev
+      FROM predictions
+    `);
+    const dist = distRows[0];
+
     const { rows: modelRows } = await pool.query('SELECT * FROM model_metadata WHERE is_active = true LIMIT 1');
     const model = modelRows[0] || {};
     
@@ -33,6 +45,14 @@ export async function GET() {
         feature: 'MonthlyCharges',
         psi_score: model.psi_monthly_charges || 0,
         status: status
+      },
+      risk_distribution: {
+        lowRisk: parseInt(dist.low_risk_count || 0),
+        mediumRisk: parseInt(dist.medium_risk_count || 0),
+        highRisk: parseInt(dist.high_risk_count || 0),
+        lowRevenue: parseFloat(dist.low_risk_rev || 0),
+        mediumRevenue: parseFloat(dist.medium_risk_rev || 0),
+        highRevenue: parseFloat(dist.high_risk_rev || 0)
       }
     });
   } catch (error) {

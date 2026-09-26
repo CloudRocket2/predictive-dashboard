@@ -9,14 +9,18 @@ interface Props {
     highRisk: number;
     mediumRisk: number;
     lowRisk: number;
+    lowRevenue?: number;
+    mediumRevenue?: number;
+    highRevenue?: number;
+    totalRevenue?: number;
   };
 }
 
 export default function RiskDonutChart({ data }: Props) {
   const chartData = [
-    { name: 'Low Risk', value: data.lowRisk, color: '#3b82f6', amount: 52120 },
-    { name: 'Medium Risk', value: data.mediumRisk, color: '#f59e0b', amount: 16840 },
-    { name: 'High Risk', value: data.highRisk, color: '#ef4444', amount: 8420 },
+    { name: 'Low Risk', value: data.lowRisk || 0, color: '#3b82f6', amount: data.lowRevenue || 0 },
+    { name: 'Medium Risk', value: data.mediumRisk || 0, color: '#f59e0b', amount: data.mediumRevenue || 0 },
+    { name: 'High Risk', value: data.highRisk || 0, color: '#ef4444', amount: data.highRevenue || 0 },
   ];
 
   const total = chartData.reduce((acc, curr) => acc + curr.value, 0);
@@ -62,7 +66,7 @@ export default function RiskDonutChart({ data }: Props) {
         
         {/* Center Text */}
         <div className="absolute bottom-2 left-0 right-0 flex flex-col items-center justify-end pb-2">
-          <span className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">$84,210</span>
+          <span className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">${new Intl.NumberFormat('en-US').format(data.totalRevenue || 0)}</span>
           <div className="flex items-center gap-1 mt-1">
             <ArrowUpRight className="w-4 h-4 text-emerald-500 stroke-[3]" />
             <span className="text-sm font-bold text-emerald-500">16.8%</span>

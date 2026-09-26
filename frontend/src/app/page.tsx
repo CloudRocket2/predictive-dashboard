@@ -421,9 +421,13 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <RiskDonutChart 
               data={{
-                highRisk: customersData?.customers.filter((c: any) => c.churn_probability > 0.75).length || 0,
-                mediumRisk: customersData?.customers.filter((c: any) => c.churn_probability > 0.5 && c.churn_probability <= 0.75).length || 0,
-                lowRisk: customersData?.customers.filter((c: any) => c.churn_probability <= 0.5).length || 0,
+                highRisk: summary?.risk_distribution?.highRisk || 0,
+                mediumRisk: summary?.risk_distribution?.mediumRisk || 0,
+                lowRisk: summary?.risk_distribution?.lowRisk || 0,
+                lowRevenue: summary?.risk_distribution?.lowRevenue || 0,
+                mediumRevenue: summary?.risk_distribution?.mediumRevenue || 0,
+                highRevenue: summary?.risk_distribution?.highRevenue || 0,
+                totalRevenue: summary?.total_revenue || 0,
               }} 
             />
             <RevenueAreaChart 
