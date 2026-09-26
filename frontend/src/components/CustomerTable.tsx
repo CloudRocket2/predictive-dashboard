@@ -27,9 +27,31 @@ export default function CustomerTable({
   
   const [actingOn, setActingOn] = React.useState<string | null>(null);
 
+
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
   };
+
+  const formatDriverName = (driver: string) => {
+    if (driver === 'MonthlyCharges') return 'Monthly Charges';
+    if (driver === 'TotalCharges') return 'Total Charges';
+    if (driver === 'tenure') return 'Tenure';
+    if (driver.includes(': ')) {
+        const parts = driver.split(': ');
+        let val = parts[1];
+        if (val === 'Fiber optic') return 'Fiber Optic';
+        if (val === 'Month-to-month') return 'Month-to-Month';
+        if (val === 'No phone service') return 'No Phone Service';
+        if (val === 'No internet service') return 'No Internet';
+        if (val === 'Electronic check') return 'Electronic Check';
+        if (val === 'Mailed check') return 'Mailed Check';
+        if (val === 'Bank transfer (automatic)') return 'Bank Transfer';
+        if (val === 'Credit card (automatic)') return 'Credit Card';
+        return val;
+    }
+    return driver;
+  };
+
 
   const getRiskColor = (prob: number) => {
     if (prob < 0.5) return 'bg-emerald-500';
@@ -85,7 +107,6 @@ export default function CustomerTable({
               <th className="pb-4 pl-4 pr-4">Customer ID</th>
               <th className="pb-4 px-4">Monthly Charges</th>
               <th className="pb-4 px-4">Churn Risk</th>
-              <th className="pb-4 px-4">Confidence</th>
               <th className="pb-4 px-4">Top Drivers</th>
               <th className="pb-4 pr-4 text-right">Action</th>
             </tr>
@@ -122,7 +143,7 @@ export default function CustomerTable({
                         key={index}
                         className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 dark:text-slate-500"
                       >
-                        {driver}
+                        {formatDriverName(driver)}
                       </span>
                     ))}
                   </div>
