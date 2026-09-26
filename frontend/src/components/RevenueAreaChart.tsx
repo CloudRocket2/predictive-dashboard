@@ -143,7 +143,7 @@ export default function RevenueAreaChart({ baselineRevenue, retainedRevenue }: P
             
             <Line
               yAxisId="left"
-              type="stepAfter"
+              type="monotone"
               dataKey="total"
               stroke="var(--chart-primary)"
               strokeWidth={2.5}
