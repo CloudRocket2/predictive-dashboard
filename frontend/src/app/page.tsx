@@ -222,7 +222,7 @@ export default function DashboardPage() {
             
             {isTraining && (
               <div className="w-full max-w-sm mt-2">
-                <div className="flex justify-between text-xs font-semibold text-slate-500 dark:text-slate-400 dark:text-slate-500 mb-2">
+                <div className="flex justify-between text-xs font-semibold text-slate-500 dark:text-slate-400 mb-2">
                   <span>Recompiling weights & running SHAP...</span>
                   <span>{Math.round(retrainProgress)}%</span>
                 </div>
@@ -322,7 +322,7 @@ export default function DashboardPage() {
           
           <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 h-[400px]">
              <h3 className="font-bold text-slate-900 dark:text-white mb-1">Value Matrix (Sample)</h3>
-             <p className="text-xs font-medium text-slate-500 dark:text-slate-400 dark:text-slate-500 mb-6">Top right quadrant = High Value, High Risk. Target immediately.</p>
+             <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-6">Top right quadrant = High Value, High Risk. Target immediately.</p>
              <ResponsiveContainer width="100%" height="100%">
                <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
@@ -494,7 +494,7 @@ export default function DashboardPage() {
             </div>
             
             <div className="flex items-center gap-2">
-              <button className="w-10 h-10 flex items-center justify-center rounded-full text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:text-slate-500 hover:bg-slate-50 dark:bg-slate-950 transition-colors relative">
+              <button className="w-10 h-10 flex items-center justify-center rounded-full text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors relative">
                 <Bell className="w-5 h-5" />
                 <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-rose-500 rounded-full border-2 border-white"></span>
               </button>

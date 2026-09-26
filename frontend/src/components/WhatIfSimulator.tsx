@@ -30,13 +30,13 @@ export default function WhatIfSimulator({ onSimulate, result }: WhatIfSimulatorP
     <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm p-6">
       <div className="flex items-center gap-2 mb-6">
         <Sparkles className="w-5 h-5 text-blue-600" />
-        <h2 className="text-lg font-semibold text-gray-900">What-If Simulator</h2>
+        <h2 className="text-lg font-semibold text-slate-900 dark:text-white">What-If Simulator</h2>
       </div>
 
       <div className="space-y-6">
         <div>
           <div className="flex justify-between items-center mb-2">
-            <label className="text-sm font-medium text-gray-700">Discount %</label>
+            <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Discount %</label>
             <span className="bg-blue-100 text-blue-700 text-xs font-semibold px-2 py-1 rounded-full">
               {discountPct}%
             </span>
@@ -48,13 +48,13 @@ export default function WhatIfSimulator({ onSimulate, result }: WhatIfSimulatorP
             step="1"
             value={discountPct}
             onChange={(e) => setDiscountPct(Number(e.target.value))}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+            className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-600"
           />
         </div>
 
         <div>
           <div className="flex justify-between items-center mb-2">
-            <label className="text-sm font-medium text-gray-700">Risk Threshold</label>
+            <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Risk Threshold</label>
             <span className="bg-blue-100 text-blue-700 text-xs font-semibold px-2 py-1 rounded-full">
               {riskThreshold.toFixed(2)}
             </span>
@@ -66,7 +66,7 @@ export default function WhatIfSimulator({ onSimulate, result }: WhatIfSimulatorP
             step="0.05"
             value={riskThreshold}
             onChange={(e) => setRiskThreshold(Number(e.target.value))}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+            className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-600"
           />
         </div>
 
@@ -80,19 +80,19 @@ export default function WhatIfSimulator({ onSimulate, result }: WhatIfSimulatorP
         {result && (
           <div className="mt-2 grid grid-cols-2 gap-4">
             <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl">
-              <div className="text-sm text-gray-500 mb-1">Customers Targeted</div>
-              <div className="text-xl font-semibold">{result.customers_targeted}</div>
+              <div className="text-sm text-slate-500 dark:text-slate-400 mb-1">Customers Targeted</div>
+              <div className="text-xl font-semibold text-slate-900 dark:text-white">{result.customers_targeted}</div>
             </div>
             <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl">
-              <div className="text-sm text-gray-500 mb-1">Revenue at Risk</div>
-              <div className="text-xl font-semibold">{formatCurrency(result.original_revenue_at_risk)}</div>
+              <div className="text-sm text-slate-500 dark:text-slate-400 mb-1">Revenue at Risk</div>
+              <div className="text-xl font-semibold text-slate-900 dark:text-white">{formatCurrency(result.original_revenue_at_risk)}</div>
             </div>
             <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl">
-              <div className="text-sm text-gray-500 mb-1">Discount Cost</div>
-              <div className="text-xl font-semibold text-rose-500">-{formatCurrency(result.discount_cost)}</div>
+              <div className="text-sm text-slate-500 dark:text-slate-400 mb-1">Discount Cost</div>
+              <div className="text-xl font-semibold text-slate-900 dark:text-white text-rose-500">-{formatCurrency(result.discount_cost)}</div>
             </div>
             <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl">
-              <div className="text-sm text-gray-500 mb-1">Net Savings</div>
+              <div className="text-sm text-slate-500 dark:text-slate-400 mb-1">Net Savings</div>
               <div className="text-2xl font-bold text-emerald-500">{formatCurrency(result.net_savings)}</div>
             </div>
           </div>

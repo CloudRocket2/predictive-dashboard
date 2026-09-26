@@ -86,7 +86,7 @@ export default function CustomerTable({
           </div>
           <h2 className="text-xl font-bold text-slate-900 dark:text-white">At-Risk Customers</h2>
         </div>
-        <span className="text-sm font-medium text-slate-500 dark:text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-950 px-3 py-1 rounded-full">{total} total</span>
+        <span className="text-sm font-medium text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-950 px-3 py-1 rounded-full">{total} total</span>
       </div>
 
       <div className="mb-6 relative max-w-sm">
@@ -116,10 +116,10 @@ export default function CustomerTable({
               <tr 
                 key={customer.customer_id} 
                 onClick={() => onRowClick && onRowClick(customer.customer_id)}
-                className={`transition-colors ${onRowClick ? 'cursor-pointer hover:bg-slate-50 dark:bg-slate-950' : 'hover:bg-slate-50 dark:bg-slate-950'}`}
+                className={`transition-colors ${onRowClick ? 'cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800' : 'hover:bg-slate-50 dark:hover:bg-slate-800'}`}
               >
                 <td className="py-4 pl-4 pr-4 font-mono text-sm font-medium text-slate-900 dark:text-white">{customer.customer_id}</td>
-                <td className="py-4 px-4 text-sm text-slate-600 dark:text-slate-400 dark:text-slate-500 font-medium">{formatCurrency(customer.monthly_charges)}</td>
+                <td className="py-4 px-4 text-sm text-slate-600 dark:text-slate-400 font-medium">{formatCurrency(customer.monthly_charges)}</td>
                 <td className="py-4 px-4">
                   <div className="flex items-center gap-3">
                     <div className="flex-1 h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden w-24">
@@ -133,7 +133,7 @@ export default function CustomerTable({
                     </span>
                   </div>
                 </td>
-                <td className="py-4 px-4 text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500 font-medium">
+                <td className="py-4 px-4 text-sm text-slate-500 dark:text-slate-400 font-medium">
                   {Math.round(customer.lower_bound * 100)}% - {Math.round(customer.upper_bound * 100)}%
                 </td>
                 <td className="py-4 px-4">
@@ -141,7 +141,7 @@ export default function CustomerTable({
                     {customer.top_drivers?.map((driver, index) => (
                       <span
                         key={index}
-                        className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 dark:text-slate-500"
+                        className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400"
                       >
                         {formatDriverName(driver)}
                       </span>
@@ -162,7 +162,7 @@ export default function CustomerTable({
             ))}
             {customers.length === 0 && (
               <tr>
-                <td colSpan={6} className="py-12 text-center text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500 font-medium bg-slate-50 dark:bg-slate-950/50 rounded-xl mt-4">
+                <td colSpan={6} className="py-12 text-center text-sm text-slate-500 dark:text-slate-400 font-medium bg-slate-50 dark:bg-slate-950/50 rounded-xl mt-4">
                   No customers found matching your criteria.
                 </td>
               </tr>
@@ -175,17 +175,17 @@ export default function CustomerTable({
         <button
           onClick={() => onPageChange(Math.max(1, page - 1))}
           disabled={page <= 1}
-          className="px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:bg-slate-950 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Previous
         </button>
-        <span className="text-sm font-medium text-slate-500 dark:text-slate-400 dark:text-slate-500">
+        <span className="text-sm font-medium text-slate-500 dark:text-slate-400">
           Page {page} {totalPages > 0 && `of ${totalPages}`}
         </span>
         <button
           onClick={() => onPageChange(page + 1)}
           disabled={totalPages > 0 ? page >= totalPages : false}
-          className="px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:bg-slate-950 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Next
         </button>

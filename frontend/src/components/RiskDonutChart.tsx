@@ -29,7 +29,7 @@ export default function RiskDonutChart({ data }: Props) {
     <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 shadow-[0_2px_10px_rgb(0,0,0,0.02)] border border-slate-100 dark:border-slate-800 flex flex-col h-full relative">
       <div className="flex items-center justify-between mb-2">
         <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100">Risk Distribution</h3>
-        <button className="text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:text-slate-500">
+        <button className="text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:text-slate-400">
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
           </svg>
@@ -83,7 +83,7 @@ export default function RiskDonutChart({ data }: Props) {
           <div key={i} className="flex items-center justify-between text-sm">
             <div className="flex items-center gap-3">
               <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }} />
-              <span className="font-semibold text-slate-600 dark:text-slate-400 dark:text-slate-500">{item.name}</span>
+              <span className="font-semibold text-slate-600 dark:text-slate-400">{item.name}</span>
             </div>
             <div className="flex items-center gap-6">
               <span className="text-slate-400 dark:text-slate-500 font-medium w-10 text-right">

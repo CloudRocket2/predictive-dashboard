@@ -40,10 +40,10 @@ export default function CustomerProfileModal({ customerId, onClose }: Props) {
             </div>
             <div>
               <h2 className="text-xl font-bold text-slate-900 dark:text-white">{customerId}</h2>
-              <p className="text-sm font-medium text-slate-500 dark:text-slate-400 dark:text-slate-500">Customer Deep Dive</p>
+              <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Customer Deep Dive</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:text-slate-500 hover:bg-slate-50 dark:bg-slate-950 rounded-full transition-colors">
+          <button onClick={onClose} className="p-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-colors">
             <X className="w-6 h-6" />
           </button>
         </div>
@@ -53,7 +53,7 @@ export default function CustomerProfileModal({ customerId, onClose }: Props) {
           {isLoading && (
             <div className="flex flex-col items-center justify-center py-20">
               <Activity className="w-8 h-8 text-indigo-600 animate-spin mb-4" />
-              <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500 font-medium">Analyzing customer risk factors...</p>
+              <p className="text-slate-500 dark:text-slate-400 font-medium">Analyzing customer risk factors...</p>
             </div>
           )}
           
@@ -80,7 +80,7 @@ export default function CustomerProfileModal({ customerId, onClose }: Props) {
                 </div>
                 <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
                   <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Tenure</p>
-                  <p className="text-2xl font-bold text-slate-900 dark:text-white">{data.tenure} <span className="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">mos</span></p>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">{data.tenure} <span className="text-sm text-slate-500 dark:text-slate-400">mos</span></p>
                 </div>
                 <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
                   <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-1">Total LTV</p>
@@ -100,14 +100,14 @@ export default function CustomerProfileModal({ customerId, onClose }: Props) {
                         <CreditCard className="w-5 h-5 text-slate-400 dark:text-slate-500 mt-0.5" />
                         <div>
                           <p className="text-sm font-semibold text-slate-900 dark:text-white">{data.contract} Contract</p>
-                          <p className="text-xs font-medium text-slate-500 dark:text-slate-400 dark:text-slate-500">{data.payment_method}</p>
+                          <p className="text-xs font-medium text-slate-500 dark:text-slate-400">{data.payment_method}</p>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
                         <Monitor className="w-5 h-5 text-slate-400 dark:text-slate-500 mt-0.5" />
                         <div>
                           <p className="text-sm font-semibold text-slate-900 dark:text-white">{data.internet_service}</p>
-                          <p className="text-xs font-medium text-slate-500 dark:text-slate-400 dark:text-slate-500">Internet Service</p>
+                          <p className="text-xs font-medium text-slate-500 dark:text-slate-400">Internet Service</p>
                         </div>
                       </div>
                     </div>
@@ -134,7 +134,7 @@ export default function CustomerProfileModal({ customerId, onClose }: Props) {
                 {/* SHAP Chart */}
                 <div className="lg:col-span-2 bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
                   <h3 className="font-bold text-slate-900 dark:text-white mb-1">Risk Drivers (SHAP Waterfall)</h3>
-                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400 dark:text-slate-500 mb-6">Red pushes towards churn, green pushes away from churn.</p>
+                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-6">Red pushes towards churn, green pushes away from churn.</p>
                   
                   <div className="h-[300px]">
                     <ResponsiveContainer width="100%" height="100%">

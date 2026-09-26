@@ -71,7 +71,7 @@ export default function MetricCards({ totalRevenue, mrr, revenueAtRisk, totalCus
               className={`px-4 py-1.5 text-xs font-semibold rounded-full transition-colors ${
                 timeRange === range
                   ? 'bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 shadow-sm'
-                  : 'text-slate-500 dark:text-slate-400 dark:text-slate-500 hover:text-slate-800 dark:text-slate-100'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-100'
               }`}
             >
               {range}
@@ -92,9 +92,9 @@ export default function MetricCards({ totalRevenue, mrr, revenueAtRisk, totalCus
             >
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-6 h-6 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center bg-slate-50 dark:bg-slate-950">
-                  <Icon className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400 dark:text-slate-500" />
+                  <Icon className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                 </div>
-                <span className="text-xs font-bold text-slate-600 dark:text-slate-400 dark:text-slate-500">{metric.title}</span>
+                <span className="text-xs font-bold text-slate-600 dark:text-slate-400">{metric.title}</span>
               </div>
               
               <div className="mt-auto">
