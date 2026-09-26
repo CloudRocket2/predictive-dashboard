@@ -43,7 +43,6 @@ export default function RevenueAreaChart({ baselineRevenue, retainedRevenue, tar
   for (let i = 0; i < numPoints; i++) {
     const labelIdx = Math.floor(i / (numPoints / timeLabels.length));
     const point = historicalData[i];
-    const labelIdx = Math.floor(i / (numPoints / timeLabels.length));
     data.push({
       name: timeLabels[Math.min(labelIdx, timeLabels.length - 1)],
       total: Math.floor(point.val),
