@@ -158,8 +158,8 @@ export default function DashboardPage() {
       {driftStatus && driftStatus !== 'Stable' && (
         <div className={`p-4 rounded-2xl border ${
           driftStatus === 'Critical'
-            ? 'bg-rose-50 border-rose-200 text-rose-800'
-            : 'bg-amber-50 border-amber-200 text-amber-800'
+            ? 'bg-rose-50 dark:bg-rose-500/10 border-rose-200 dark:border-rose-500/20 text-rose-800 dark:text-rose-400'
+            : 'bg-amber-50 dark:bg-amber-500/10 border-amber-200 dark:border-amber-500/20 text-amber-800 dark:text-amber-400'
         }`}>
           <div className="flex gap-3">
              <ShieldAlert className="w-5 h-5 flex-shrink-0" />
@@ -238,15 +238,15 @@ export default function DashboardPage() {
 
           {retrainResult && !isTraining && (
             <div className={`mt-6 p-5 rounded-2xl border ${
-              retrainResult.status === 'success' ? 'bg-emerald-50 border-emerald-100' : 'bg-rose-50 border-rose-100'
+              retrainResult.status === 'success' ? 'bg-emerald-50 dark:bg-emerald-500/10 border-emerald-100 dark:border-emerald-500/20' : 'bg-rose-50 dark:bg-rose-500/10 border-rose-100 dark:border-rose-500/20'
             }`}>
               <p className={`font-semibold text-sm ${
-                retrainResult.status === 'success' ? 'text-emerald-800' : 'text-rose-800'
+                retrainResult.status === 'success' ? 'text-emerald-800 dark:text-emerald-400' : 'text-rose-800 dark:text-rose-400'
               }`}>
                 {retrainResult.message}
               </p>
               {retrainResult.status === 'success' && (
-                <div className="mt-3 text-sm text-emerald-700 font-medium">
+                <div className="mt-3 text-sm text-emerald-700 dark:text-emerald-400/80 font-medium">
                   ROC-AUC: {retrainResult.roc_auc} &bull; Brier: {retrainResult.brier_score}
                 </div>
               )}
@@ -379,7 +379,7 @@ export default function DashboardPage() {
   const renderDashboard = () => (
     <div className="space-y-6">
       {error && (
-        <div className="bg-rose-50 border border-rose-100 rounded-2xl p-5 text-rose-800 flex items-center justify-between">
+        <div className="bg-rose-50 dark:bg-rose-500/10 border border-rose-100 dark:border-rose-500/20 rounded-2xl p-5 text-rose-800 dark:text-rose-400 flex items-center justify-between">
           <div>
             <p className="font-semibold">Failed to connect to backend</p>
             <p className="text-sm mt-1">{error.message}</p>
@@ -401,8 +401,8 @@ export default function DashboardPage() {
           {driftStatus && driftStatus !== 'Stable' && (
             <div className={`p-4 rounded-2xl border flex items-center justify-between ${
               driftStatus === 'Critical'
-                ? 'bg-rose-50 border-rose-200 text-rose-800'
-                : 'bg-amber-50 border-amber-200 text-amber-800'
+                ? 'bg-rose-50 dark:bg-rose-500/10 border-rose-200 dark:border-rose-500/20 text-rose-800 dark:text-rose-400'
+                : 'bg-amber-50 dark:bg-amber-500/10 border-amber-200 dark:border-amber-500/20 text-amber-800 dark:text-amber-400'
             }`}>
               <div className="flex gap-3 items-center">
                  <ShieldAlert className="w-5 h-5 flex-shrink-0" />
