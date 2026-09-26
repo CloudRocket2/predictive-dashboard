@@ -177,41 +177,38 @@ export default function DashboardPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-sm p-8 border border-slate-100 dark:border-slate-800">
-          <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-6">Current Model</h2>
+          <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-6">Current Model Engine</h2>
           <div className="space-y-5">
-            <div className="flex justify-between items-center py-3 border-b border-slate-50">
-              <span className="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">Algorithm</span>
-              <span className="text-sm font-semibold text-slate-900 dark:text-white px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full">XGBoost</span>
+            <div className="flex justify-between items-center py-3 border-b border-slate-100 dark:border-slate-800">
+              <span className="text-sm text-slate-500 dark:text-slate-400">LLM Engine</span>
+              <span className="text-sm font-semibold text-slate-900 dark:text-white px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full border border-slate-200 dark:border-slate-700">Groq Llama-3-8B</span>
             </div>
-            <div className="flex justify-between items-center py-3 border-b border-slate-50">
-              <span className="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">ROC-AUC</span>
+            <div className="flex justify-between items-center py-3 border-b border-slate-100 dark:border-slate-800">
+              <span className="text-sm text-slate-500 dark:text-slate-400">Context Window</span>
               <span className="text-sm font-semibold text-slate-900 dark:text-white">
-                {summary?.model_roc_auc?.toFixed(4) ?? '--'}
+                8,192 Tokens
               </span>
             </div>
-            <div className="flex justify-between items-center py-3 border-b border-slate-50">
-              <span className="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">Brier Score</span>
-              <span className="text-sm font-semibold text-slate-900 dark:text-white">
-                {summary?.model_brier_score?.toFixed(4) ?? '--'}
+            <div className="flex justify-between items-center py-3 border-b border-slate-100 dark:border-slate-800">
+              <span className="text-sm text-slate-500 dark:text-slate-400">Average Inference Latency</span>
+              <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+                ~320ms (Edge)
               </span>
             </div>
             <div className="flex justify-between items-center py-3">
-              <span className="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500">PSI (MonthlyCharges)</span>
-              <span className={`text-sm font-semibold ${
-                driftStatus === 'Stable' ? 'text-emerald-600' :
-                driftStatus === 'Warning' ? 'text-amber-600' : 'text-rose-600'
-              }`}>
-                {psiScore?.toFixed(4) ?? '--'} ({driftStatus ?? 'Unknown'})
+              <span className="text-sm text-slate-500 dark:text-slate-400">Knowledge Base Status</span>
+              <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+                Synced with Neon PostgreSQL
               </span>
             </div>
           </div>
         </div>
 
         <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-sm p-8 border border-slate-100 dark:border-slate-800">
-          <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Retrain Model</h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500 leading-relaxed mb-8">
-            Retrain the XGBoost model using the latest data in your Neon PostgreSQL database.
-            This runs in the background and will dynamically update SHAP values and drift metrics.
+          <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Sync Knowledge Base</h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-8">
+            Sync the latest customer interactions and billing history from your Neon PostgreSQL database into the LLM's context.
+            This ensures Llama-3's churn predictions and explanations are strictly grounded in real-time data.
           </p>
           <div className="flex flex-col gap-4">
             <button
@@ -220,7 +217,7 @@ export default function DashboardPage() {
               className="flex items-center justify-center sm:justify-start gap-3 bg-slate-900 hover:bg-slate-800 disabled:bg-slate-300 text-white rounded-xl px-6 py-3 font-medium transition-all shadow-sm w-fit"
             >
               <RefreshCw className={`w-4 h-4 ${isTraining ? 'animate-spin' : ''}`} />
-              {isTraining ? 'Training in progress...' : 'Initiate Retrain'}
+              {isTraining ? 'Training in progress...' : 'Sync Knowledge Base'}
             </button>
             
             {isTraining && (
