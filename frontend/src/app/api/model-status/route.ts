@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  if (global.isTraining) {
-    const elapsed = Date.now() - (global.trainingStartedAt || 0);
+  if ((global as any).isTraining) {
+    const elapsed = Date.now() - ((global as any).trainingStartedAt || 0);
     if (elapsed > 5000) { // 5 seconds to mock completion
-      global.isTraining = false;
+      (global as any).isTraining = false;
       return NextResponse.json({
         status: "completed",
         message: "LLM Sync completed. Groq accuracy optimized.",
