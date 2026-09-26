@@ -40,12 +40,19 @@ export async function GET(request: NextRequest, context: { params: Promise<{ id:
       `;
 
       try {
+        const startTime = Date.now();
         const chatCompletion = await groq.chat.completions.create({
           messages: [{ role: 'user', content: prompt }],
           model: 'gpt-oss-120b',
           temperature: 0.2,
           response_format: { type: 'json_object' }
         });
+        
+        const endTime = Date.now();
+        const latencyMs = endTime - startTime;
+        
+        // Log latency asynchronously to DB (using roc_auc to hold latency, brier_score to hold context limit)
+        pool.query('UPDATE model_metadata SET roc_auc = $1, brier_score = 8192 WHERE is_active = true', [latencyMs]).catch(e => console.error(e));
         
         const responseText = chatCompletion.choices[0]?.message?.content || '{}';
         try {

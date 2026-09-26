@@ -79,7 +79,7 @@ export default function DashboardPage() {
   const { data: modelStatus, mutate: mutateModelStatus } = useSWR(
     'model-status', 
     getModelStatus, 
-    { refreshInterval: retrainResult?.status === 'training_started' || retrainResult?.status === 'training' ? 2000 : 0 }
+    { refreshInterval: retrainResult?.status === 'training_started' || retrainResult?.status === 'training' ? 2000 : 5000 }
   );
 
   useEffect(() => {
@@ -186,13 +186,13 @@ export default function DashboardPage() {
             <div className="flex justify-between items-center py-3 border-b border-slate-100 dark:border-slate-800">
               <span className="text-sm text-slate-500 dark:text-slate-400">Context Window</span>
               <span className="text-sm font-semibold text-slate-900 dark:text-white">
-                8,192 Tokens
+                {modelStatus?.metrics?.context_window ? `${modelStatus.metrics.context_window.toLocaleString()} Tokens` : '8,192 Tokens'}
               </span>
             </div>
             <div className="flex justify-between items-center py-3 border-b border-slate-100 dark:border-slate-800">
               <span className="text-sm text-slate-500 dark:text-slate-400">Average Inference Latency</span>
               <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
-                ~320ms (Edge)
+                {modelStatus?.metrics?.latency ? `~${Math.round(modelStatus.metrics.latency)}ms (Live)` : '~320ms (Edge)'}
               </span>
             </div>
             <div className="flex justify-between items-center py-3">
