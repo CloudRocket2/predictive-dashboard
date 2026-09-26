@@ -42,7 +42,7 @@ export async function GET(request: NextRequest, context: { params: Promise<{ id:
       try {
         const chatCompletion = await groq.chat.completions.create({
           messages: [{ role: 'user', content: prompt }],
-          model: 'llama3-8b-8192',
+          model: 'gpt-oss-120b',
           temperature: 0.2,
           response_format: { type: 'json_object' }
         });

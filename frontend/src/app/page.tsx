@@ -181,7 +181,7 @@ export default function DashboardPage() {
           <div className="space-y-5">
             <div className="flex justify-between items-center py-3 border-b border-slate-100 dark:border-slate-800">
               <span className="text-sm text-slate-500 dark:text-slate-400">LLM Engine</span>
-              <span className="text-sm font-semibold text-slate-900 dark:text-white px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full border border-slate-200 dark:border-slate-700">Groq Llama-3-8B</span>
+              <span className="text-sm font-semibold text-slate-900 dark:text-white px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full border border-slate-200 dark:border-slate-700">GPT OSS 120B</span>
             </div>
             <div className="flex justify-between items-center py-3 border-b border-slate-100 dark:border-slate-800">
               <span className="text-sm text-slate-500 dark:text-slate-400">Context Window</span>
@@ -208,7 +208,7 @@ export default function DashboardPage() {
           <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Sync Knowledge Base</h2>
           <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-8">
             Sync the latest customer interactions and billing history from your Neon PostgreSQL database into the LLM's context.
-            This ensures Llama-3's churn predictions and explanations are strictly grounded in real-time data.
+            This ensures GPT OSS 120B's churn predictions and explanations are strictly grounded in real-time data.
           </p>
           <div className="flex flex-col gap-4">
             <button
