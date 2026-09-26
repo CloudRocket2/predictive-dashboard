@@ -66,7 +66,9 @@ export default function RiskDonutChart({ data }: Props) {
         
         {/* Center Text */}
         <div className="absolute bottom-2 left-0 right-0 flex flex-col items-center justify-end pb-2">
-          <span className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">${new Intl.NumberFormat('en-US').format(data.totalRevenue || 0)}</span>
+          <span className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+            ${new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format((data.lowRevenue || 0) + (data.mediumRevenue || 0) + (data.highRevenue || 0))}
+          </span>
           <div className="flex items-center gap-1 mt-1">
             <ArrowUpRight className="w-4 h-4 text-emerald-500 stroke-[3]" />
             <span className="text-sm font-bold text-emerald-500">16.8%</span>
@@ -87,8 +89,8 @@ export default function RiskDonutChart({ data }: Props) {
               <span className="text-slate-400 dark:text-slate-500 font-medium w-10 text-right">
                 {Math.round((item.value / (total || 1)) * 100)}%
               </span>
-              <span className="font-semibold text-slate-800 dark:text-slate-100 w-16 text-right">
-                ${new Intl.NumberFormat('en-US').format(item.amount)}
+              <span className="font-bold text-slate-800 dark:text-slate-100 w-16 text-right">
+                ${new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(item.amount)}
               </span>
             </div>
           </div>
