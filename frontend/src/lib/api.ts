@@ -8,7 +8,8 @@ import {
   ActionResponse
 } from './types';
 
-export const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+// We now call Next.js API routes natively!
+export const BASE_URL = '';
 
 async function handleResponse<T>(response: Response, errorMessage: string): Promise<T> {
   if (!response.ok) {
@@ -51,38 +52,19 @@ export async function fetchCustomers(
 export async function simulateDiscount(discountPercentage: number, riskThreshold: number): Promise<SimulationResponse> {
   const response = await fetch(`${BASE_URL}/api/simulate-discount`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      discount_percentage: discountPercentage,
-      risk_threshold: riskThreshold,
-    }),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ discount_percentage: discountPercentage, risk_threshold: riskThreshold }),
   });
-
   return handleResponse<SimulationResponse>(response, 'Failed to simulate discount');
 }
 
 export async function retrainModel(): Promise<RetrainResponse> {
-  const response = await fetch(`${BASE_URL}/api/retrain`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-
+  const response = await fetch(`${BASE_URL}/api/retrain`, { method: 'POST' });
   return handleResponse<RetrainResponse>(response, 'Failed to retrain model');
 }
 
 export async function getModelStatus(): Promise<RetrainResponse> {
-  const response = await fetch(`${BASE_URL}/api/model-status`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    cache: 'no-store',
-  });
-
+  const response = await fetch(`${BASE_URL}/api/model-status`, { cache: 'no-store' });
   return handleResponse<RetrainResponse>(response, 'Failed to get model status');
 }
 
@@ -97,9 +79,6 @@ export async function fetchSegmentation(): Promise<SegmentationResponse> {
 }
 
 export async function triggerCampaign(customerId: string): Promise<ActionResponse> {
-  const response = await fetch(`${BASE_URL}/api/trigger-campaign?customer_id=${customerId}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-  });
+  const response = await fetch(`${BASE_URL}/api/trigger-campaign?customer_id=${customerId}`, { method: 'POST' });
   return handleResponse<ActionResponse>(response, 'Failed to trigger campaign');
 }
