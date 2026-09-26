@@ -5,12 +5,13 @@ import { DollarSign, ArrowUpRight, ArrowDownRight, Users, Activity, TrendingUp }
 
 interface MetricCardsProps {
   totalRevenue: number;
+  mrr: number;
   revenueAtRisk: number;
   totalCustomers: number;
   avgChurnRisk: number;
 }
 
-export default function MetricCards({ totalRevenue, revenueAtRisk, totalCustomers, avgChurnRisk }: MetricCardsProps) {
+export default function MetricCards({ totalRevenue, mrr, revenueAtRisk, totalCustomers, avgChurnRisk }: MetricCardsProps) {
   const [timeRange, setTimeRange] = useState<'Days' | 'Week' | 'Month'>('Month');
 
   // Multipliers to mock data changing based on time range
@@ -24,30 +25,29 @@ export default function MetricCards({ totalRevenue, revenueAtRisk, totalCustomer
     }).format(value);
   };
   
-  // Format to K for thousands to match design (e.g. $84K)
+  // Format to K/M for thousands/millions to match design
   const formatK = (value: number) => {
-    if (value >= 1000) {
-      return `$${(value / 1000).toFixed(0)}K`;
-    }
+    if (value >= 1000000) return `$${(value / 1000000).toFixed(1)}M`;
+    if (value >= 1000) return `$${(value / 1000).toFixed(0)}K`;
     return `$${value.toFixed(0)}`;
   };
 
   const metrics = [
     {
       title: 'Total Revenue',
-      value: formatK(totalRevenue * multiplier),
-      trend: timeRange === 'Month' ? -13.8 : timeRange === 'Week' ? 4.2 : -2.1,
+      value: formatK(totalRevenue), // Historical total LTV
+      trend: timeRange === 'Month' ? 4.8 : timeRange === 'Week' ? 1.2 : 0.1,
       icon: DollarSign,
     },
     {
       title: 'Monthly Recurring Revenue',
-      value: formatK(totalRevenue * 0.25 * multiplier), // Fake MRR for demo
+      value: formatK(mrr), 
       trend: timeRange === 'Month' ? 21.8 : timeRange === 'Week' ? 12.4 : 5.6,
       icon: TrendingUp,
     },
     {
       title: 'ARPU',
-      value: `$${(totalRevenue / (totalCustomers || 1)).toFixed(2)}`,
+      value: `$${(mrr / (totalCustomers || 1)).toFixed(2)}`,
       trend: 16.8,
       icon: Users,
     },

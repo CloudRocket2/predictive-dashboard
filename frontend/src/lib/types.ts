@@ -18,6 +18,7 @@ export interface CustomerListResponse {
 export interface DashboardSummary {
   total_customers: number;
   total_revenue: number;
+  mrr: number;
   revenue_at_risk: number;
   avg_churn_risk: number;
   model_roc_auc: number | null;

@@ -416,7 +416,7 @@ export default function DashboardPage() {
             </div>
           )}
 
-          <MetricCards totalRevenue={summary?.total_revenue || 0} revenueAtRisk={summary?.revenue_at_risk || 0} totalCustomers={summary?.total_customers || 0} avgChurnRisk={summary?.avg_churn_risk || 0} />
+          <MetricCards totalRevenue={summary?.total_revenue || 0} mrr={summary?.mrr || 0} revenueAtRisk={summary?.revenue_at_risk || 0} totalCustomers={summary?.total_customers || 0} avgChurnRisk={summary?.avg_churn_risk || 0} />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <RiskDonutChart 
@@ -433,6 +433,7 @@ export default function DashboardPage() {
             <RevenueAreaChart 
                 baselineRevenue={simResult ? simResult.projection_without_intervention : []} 
                 retainedRevenue={simResult ? simResult.projection_with_intervention : []} 
+                targetMRR={summary?.mrr || 0}
               />
           </div>
 

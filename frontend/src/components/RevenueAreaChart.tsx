@@ -15,9 +15,10 @@ import {
 interface Props {
   baselineRevenue: number[];
   retainedRevenue: number[];
+  targetMRR?: number;
 }
 
-export default function RevenueAreaChart({ baselineRevenue, retainedRevenue }: Props) {
+export default function RevenueAreaChart({ baselineRevenue, retainedRevenue, targetMRR = 456000 }: Props) {
   const [timeRange, setTimeRange] = useState<'Days' | 'Week' | 'Month'>('Month');
 
   const timeLabels = {
@@ -30,15 +31,23 @@ export default function RevenueAreaChart({ baselineRevenue, retainedRevenue }: P
   const baseMultiplier = timeRange === 'Days' ? 0.05 : timeRange === 'Week' ? 0.2 : 1;
   
   const data = [];
-  let baseVal = 50000 * baseMultiplier;
+  // Build backwards from the target MRR to create a realistic trajectory
+  let currentVal = targetMRR;
+  const historicalData = [];
+  for (let i = numPoints - 1; i >= 0; i--) {
+    const added = Math.max(1000, Math.random() * 8000); // Add 1k-8k per day/week/month
+    historicalData.unshift({ val: currentVal, added: added });
+    currentVal -= added;
+  }
+  
   for (let i = 0; i < numPoints; i++) {
-    const added = Math.max(500 * baseMultiplier, Math.random() * (4000 * baseMultiplier));
-    baseVal += added;
+    const labelIdx = Math.floor(i / (numPoints / timeLabels.length));
+    const point = historicalData[i];
     const labelIdx = Math.floor(i / (numPoints / timeLabels.length));
     data.push({
       name: timeLabels[Math.min(labelIdx, timeLabels.length - 1)],
-      total: Math.floor(baseVal),
-      added: Math.floor(added),
+      total: Math.floor(point.val),
+      added: Math.floor(point.added),
       fullDate: timeRange === 'Month' ? `${Math.floor((i % 30) + 1)} ${timeLabels[Math.min(labelIdx, timeLabels.length - 1)]} 2026` : `${timeLabels[Math.min(labelIdx, timeLabels.length - 1)]}`
     });
   }

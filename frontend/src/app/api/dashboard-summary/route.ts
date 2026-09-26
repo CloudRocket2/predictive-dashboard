@@ -6,8 +6,9 @@ export async function GET() {
     const { rows: totalRows } = await pool.query('SELECT COUNT(*) FROM customers');
     const totalCustomers = parseInt(totalRows[0].count);
 
-    const { rows: revRows } = await pool.query('SELECT SUM(monthly_charges) as total FROM customers');
-    const totalRevenue = parseFloat(revRows[0].total || 0);
+    const { rows: revRows } = await pool.query('SELECT SUM(total_charges) as total_rev, SUM(monthly_charges) as mrr FROM customers');
+    const totalRevenue = parseFloat(revRows[0].total_rev || 0);
+    const mrr = parseFloat(revRows[0].mrr || 0);
 
     const { rows: riskRevRows } = await pool.query('SELECT SUM(p.monthly_charges) as risk_total FROM predictions p WHERE p.churn_probability > 0.5');
     const revenueAtRisk = parseFloat(riskRevRows[0].risk_total || 0);
@@ -26,6 +27,11 @@ export async function GET() {
       FROM predictions
     `);
     const dist = distRows[0];
+    
+    // Scale predictions to match full dataset (since predictions was only run on 3833 test set)
+    const revScale = mrr / (parseFloat(dist.low_risk_rev) + parseFloat(dist.medium_risk_rev) + parseFloat(dist.high_risk_rev));
+    const countScale = totalCustomers / (parseFloat(dist.low_risk_count) + parseFloat(dist.medium_risk_count) + parseFloat(dist.high_risk_count));
+
 
     const { rows: modelRows } = await pool.query('SELECT * FROM model_metadata WHERE is_active = true LIMIT 1');
     const model = modelRows[0] || {};
@@ -46,13 +52,14 @@ export async function GET() {
         psi_score: model.psi_monthly_charges || 0,
         status: status
       },
+      mrr: mrr,
       risk_distribution: {
-        lowRisk: parseInt(dist.low_risk_count || 0),
-        mediumRisk: parseInt(dist.medium_risk_count || 0),
-        highRisk: parseInt(dist.high_risk_count || 0),
-        lowRevenue: parseFloat(dist.low_risk_rev || 0),
-        mediumRevenue: parseFloat(dist.medium_risk_rev || 0),
-        highRevenue: parseFloat(dist.high_risk_rev || 0)
+        lowRisk: Math.round(parseInt(dist.low_risk_count || 0) * countScale),
+        mediumRisk: Math.round(parseInt(dist.medium_risk_count || 0) * countScale),
+        highRisk: Math.round(parseInt(dist.high_risk_count || 0) * countScale),
+        lowRevenue: parseFloat(dist.low_risk_rev || 0) * revScale,
+        mediumRevenue: parseFloat(dist.medium_risk_rev || 0) * revScale,
+        highRevenue: parseFloat(dist.high_risk_rev || 0) * revScale
       }
     });
   } catch (error) {
